@@ -86,7 +86,7 @@ function Holiday(address) {
 }
 
 // OK, instance the Holiday
-var hol = new Holiday("192.168.0.119");
+var hol = null;
 var counter = null;
 
 function randcv() { 
@@ -110,7 +110,9 @@ function allcolors() {
 function demoStart() {
   
   console.log("demoStart");
+  hol = new Holiday($('#address').val())
   counter = setInterval(allcolors, 500); // run every 500 msec
+  $('#thebutton').val('Stop');
   return;
 
 }
@@ -124,8 +126,33 @@ function demoStop() {
   console.log("demoStop");
   clearInterval(counter);
   counter = null;
+  hol = null;
+  $('#thebutton').val('Start');
   return;
   
 }
 
-demoStart();
+function dobutton() {
+  console.log("dobutton");
+  return;
+}
+
+var buttonState = false;
+
+// Lordy, this is one of the reasons I hate Javascript
+// And it's not Javascript's fault.  It's the DOM.
+$( document ).ready( function() {
+  console.log("Doing the ready");
+  // And here's the stuff we do.
+  $("#thebutton").click(function () {
+    if (buttonState == false) {
+      buttonState = true;
+      demoStart();
+    } else {
+      buttonState = false;
+      demoStop();
+    }
+    console.log(buttonState);
+    console.log($('#address').val())
+  });
+});
