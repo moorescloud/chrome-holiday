@@ -13,6 +13,7 @@ function Holiday(address) {
   this.FRAME_IGNORE = 10;     // Ignore the first 10 bytes of frame
   socketId = null;         // No socket number just yet
 
+  this.closeSocket = closeSocket;
   this.setglobe = setglobe;
   this.getglobe = getglobe;
   this.render = render;
@@ -35,6 +36,11 @@ function Holiday(address) {
     }
   );
  
+  function closeSocket() {
+    chrome.socket.destroy(socketId);
+    console.log("Socket destroyed");
+  }
+
   function setglobe(globenum, r, g, b) {
     // Sets a globe's color
     if ((globenum < 0) || (globenum >= this.NUM_GLOBES)) {
@@ -136,6 +142,7 @@ function demoStop() {
   console.log("demoStop");
   clearInterval(counter);
   counter = null;
+  hol.closeSocket();
   hol = null;
   $('#thebutton').val('Start');
   return;
