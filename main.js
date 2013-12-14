@@ -126,8 +126,8 @@ function allcolors() {
 function demoStart() {
   
   console.log("demoStart");
-  hol = new Holiday($('#address').val())
-  counter = setInterval(allcolors, 330); // run every 500 msec
+  hol = new Holiday($('#selector').val())
+  counter = setInterval(allcolors, 500); // run every 500 msec
   $('#thebutton').val('Stop');
   return;
 
@@ -170,6 +170,6 @@ $( document ).ready( function() {
       demoStop();
     }
     console.log(buttonState);
-    console.log($('#address').val())
+    console.log($('#selector').val())
   });
 });
